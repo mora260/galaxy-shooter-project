@@ -65,7 +65,7 @@ public class Player : MonoBehaviour
 
     private void FireLaser() {
         Vector3 laserPosition = transform.position;
-        laserPosition.y += 0.5f;
+        laserPosition.y += 1.15f;
         if(Input.GetButton("Fire1") && _lastFire == 0 ) {
             _lastFire = _normalLaserCoolDown;
             GameObject newLaser = Instantiate(_laserPrefab, laserPosition, Quaternion.identity);

@@ -76,4 +76,4 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _enemyPrefab: {fileID: 8183137379394682959, guid: aefcf1c61c36f43408702025351d2d1c, type: 3}
   _enemyContainer: {fileID: 1115272413}
-  _enemyWaitTime: 1
+  _enemyWaitTime: 1.5

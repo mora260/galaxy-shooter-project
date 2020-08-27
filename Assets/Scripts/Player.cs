@@ -15,6 +15,9 @@ public class Player : MonoBehaviour
 
     private float _lastFire = 0;
 
+    [SerializeField]
+    private int _lives = 3;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -65,6 +68,13 @@ public class Player : MonoBehaviour
         _lastFire-=Time.deltaTime;
         if (_lastFire < 0) {
             _lastFire = 0;
+        }
+    }
+
+    public void TakeDamage() { //int damage) {
+        _lives--;
+        if (_lives < 1) {
+            Destroy(gameObject);
         }
     }
 }

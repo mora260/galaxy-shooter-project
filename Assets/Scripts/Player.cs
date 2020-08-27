@@ -7,6 +7,14 @@ public class Player : MonoBehaviour
     [SerializeField]
     private float _speed = 3.5f;
 
+    [SerializeField]
+    private float _normalLaserCoolDown = 0;
+
+    [SerializeField]
+    private GameObject _laserPrefab = null;
+
+    private float _lastFire = 0;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -18,6 +26,8 @@ public class Player : MonoBehaviour
     void Update()
     { 
        MovePlayer();
+       FireLaser();
+       WeaponCoolDown();
     }
 
     void MovePlayer() {
@@ -39,6 +49,22 @@ public class Player : MonoBehaviour
             transform.position =  new Vector3(-11.3f, transform.position.y, 0f);
         } else if (transform.position.x <= -11.3) {
             transform.position =  new Vector3(11.3f, transform.position.y, 0f);
+        }
+    }
+
+    private void FireLaser() {
+        Vector3 laserPosition = transform.position;
+        laserPosition.y += 0.5f;
+        if(Input.GetButton("Fire1") && _lastFire == 0 ) {
+            _lastFire = _normalLaserCoolDown;
+            GameObject newLaser = Instantiate(_laserPrefab, laserPosition, Quaternion.identity);
+        }
+    }
+
+    private void WeaponCoolDown() {
+        _lastFire-=Time.deltaTime;
+        if (_lastFire < 0) {
+            _lastFire = 0;
         }
     }
 }

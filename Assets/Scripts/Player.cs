@@ -18,11 +18,19 @@ public class Player : MonoBehaviour
     [SerializeField]
     private int _lives = 3;
 
+    private EnemySpawnManager _enemySpawner = null; 
+
     // Start is called before the first frame update
     void Start()
     {
         Debug.Log("Game started");
         transform.position = new Vector3(0f,0f,0f);
+        _enemySpawner = GameObject.Find("EnemySpawnManager").GetComponent<EnemySpawnManager>();
+
+        if (_enemySpawner == null) {
+            Debug.LogError("Enemy Spawn Manager is NULL.");
+        }
+
     }
 
     // Update is called once per frame
@@ -75,6 +83,7 @@ public class Player : MonoBehaviour
         _lives--;
         if (_lives < 1) {
             Destroy(gameObject);
+            _enemySpawner.StopSpawning();
         }
     }
 }

@@ -5,7 +5,7 @@ using UnityEngine;
 public class PowerUpSpawnManager : MonoBehaviour
 {
  [SerializeField]
-    private GameObject _tripleShotPrefab = null;
+    private GameObject[] _powerUpPrefabArray = null;
 
     [SerializeField]
     private GameObject _powerUpContainer = null;
@@ -27,7 +27,7 @@ public class PowerUpSpawnManager : MonoBehaviour
     IEnumerator SpawnPowerUps() {
         while(_spawnPowerUps) {
             yield return new WaitForSeconds(RandomWait());
-            GameObject newEnemy = Instantiate(_tripleShotPrefab, RandomPosition(), Quaternion.identity);
+            GameObject newEnemy = Instantiate(GetRandomPowerUp(), RandomPosition(), Quaternion.identity);
             newEnemy.transform.SetParent(_powerUpContainer.transform);
         }
     }
@@ -43,5 +43,10 @@ public class PowerUpSpawnManager : MonoBehaviour
 
     public void StopSpawning() {
         _spawnPowerUps = false;
+    }
+
+    private GameObject GetRandomPowerUp() {
+        int index = Random.Range(0, _powerUpPrefabArray.Length);
+        return _powerUpPrefabArray[index];
     }
 }

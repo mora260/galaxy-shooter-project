@@ -28,6 +28,13 @@ public class Player : MonoBehaviour
     [SerializeField]
     private float _tripleShotActiveTime = 5.0f;
 
+    [SerializeField]
+    private float _speedBoostActiveTime = 10.0f;
+
+    [SerializeField]
+    private float _speedBoost = 2.0f;
+    private float _speedModifier = 1.0f;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -54,7 +61,7 @@ public class Player : MonoBehaviour
         float y = Input.GetAxis("Vertical");
         Vector3 direction = new Vector3(x ,y, 0f);
 
-        transform.Translate(direction * Time.deltaTime * _speed);
+        transform.Translate(direction * Time.deltaTime * _speed *_speedModifier);
 
         // Mathf.Clamp() could be used!
         if (transform.position.y >= 0) {
@@ -106,5 +113,15 @@ public class Player : MonoBehaviour
 
     public void StartDeactivateTripleShot() {
         StartCoroutine(DeactivateTripleShot());
+    }
+
+    IEnumerator SpeedBoost() {
+        _speedModifier = _speedBoost;
+        yield return new WaitForSeconds(_speedBoostActiveTime);
+        _speedModifier = 1.0f;
+    }
+
+    public void ActivateSpeedBoost() {
+        StartCoroutine(SpeedBoost());
     }
 }

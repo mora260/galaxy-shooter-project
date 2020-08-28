@@ -44,7 +44,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 72839dd7ca418ca43979d6ecc9b93f5c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _tripleShotPrefab: {fileID: 3741502337001738667, guid: 480412ffbec482c40b346775b9864b99, type: 3}
+  _powerUpPrefabArray:
+  - {fileID: 3741502337001738667, guid: 480412ffbec482c40b346775b9864b99, type: 3}
+  - {fileID: 6687898341296934918, guid: 8c8a3ed30c30e9b4a9a0f81571722f58, type: 3}
   _powerUpContainer: {fileID: 5604597407277839995}
   _powerUpMinWait: 7
   _powerUpMaxWait: 15

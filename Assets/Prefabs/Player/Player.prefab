@@ -99,6 +99,7 @@ MonoBehaviour:
   _speed: 5
   _normalLaserCoolDown: 0.15
   _laserPrefab: {fileID: 1705714129657066526, guid: bfb9b9b261432a94d88e89d22db057ec, type: 3}
+  _tripleLaserPrefab: {fileID: 2304691127554448287, guid: f12819c12674ddb4b820c2e6e2d48aaf, type: 3}
   _lives: 3
 --- !u!61 &8662627017871654946
 BoxCollider2D:

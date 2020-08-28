@@ -13,12 +13,20 @@ public class Player : MonoBehaviour
     [SerializeField]
     private GameObject _laserPrefab = null;
 
+        [SerializeField]
+    private GameObject _tripleLaserPrefab = null;
+
     private float _lastFire = 0;
 
     [SerializeField]
     private int _lives = 3;
 
     private EnemySpawnManager _enemySpawner = null; 
+
+    public bool TripleLaserPowerOn {get; set;}
+
+    [SerializeField]
+    private float _tripleShotActiveTime = 5.0f;
 
     // Start is called before the first frame update
     void Start()
@@ -68,7 +76,11 @@ public class Player : MonoBehaviour
         laserPosition.y += 1.15f;
         if(Input.GetButton("Fire1") && _lastFire == 0 ) {
             _lastFire = _normalLaserCoolDown;
-            GameObject newLaser = Instantiate(_laserPrefab, laserPosition, Quaternion.identity);
+            if (TripleLaserPowerOn) {
+                GameObject newLaser = Instantiate(_tripleLaserPrefab, transform.position, Quaternion.identity);
+            } else {
+                GameObject newLaser = Instantiate(_laserPrefab, laserPosition, Quaternion.identity);
+            }
         }
     }
 
@@ -85,5 +97,14 @@ public class Player : MonoBehaviour
             Destroy(gameObject);
             _enemySpawner.StopSpawning();
         }
+    }
+
+    IEnumerator DeactivateTripleShot() {
+        yield return new WaitForSeconds(_tripleShotActiveTime);
+        TripleLaserPowerOn = false;
+    }
+
+    public void StartDeactivateTripleShot() {
+        StartCoroutine(DeactivateTripleShot());
     }
 }

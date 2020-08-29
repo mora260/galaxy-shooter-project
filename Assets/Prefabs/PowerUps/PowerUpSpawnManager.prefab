@@ -47,6 +47,7 @@ MonoBehaviour:
   _powerUpPrefabArray:
   - {fileID: 3741502337001738667, guid: 480412ffbec482c40b346775b9864b99, type: 3}
   - {fileID: 6687898341296934918, guid: 8c8a3ed30c30e9b4a9a0f81571722f58, type: 3}
+  - {fileID: 1444210283858764121, guid: b899983b7c5e00643b3f85c8c3647cd1, type: 3}
   _powerUpContainer: {fileID: 5604597407277839995}
   _powerUpMinWait: 7
   _powerUpMaxWait: 15

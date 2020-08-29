@@ -35,15 +35,23 @@ public class Player : MonoBehaviour
     private float _speedBoost = 2.0f;
     private float _speedModifier = 1.0f;
 
+    [SerializeField]
+    private float _shieldActiveTime = 5.0f;
+
+    private bool _shieldActive = false;
+
+    private GameObject _shield = null;
+
     // Start is called before the first frame update
     void Start()
     {
         Debug.Log("Game started");
         transform.position = new Vector3(0f,0f,0f);
         _enemySpawner = GameObject.Find("EnemySpawnManager").GetComponent<EnemySpawnManager>();
+        _shield = transform.Find("Shield").gameObject;
 
-        if (_enemySpawner == null) {
-            Debug.LogError("Enemy Spawn Manager is NULL.");
+        if (_enemySpawner == null || _shield == null) {
+            Debug.LogError("Enemy Spawn Manager or Shield is NULL.");
         }
 
     }
@@ -99,10 +107,16 @@ public class Player : MonoBehaviour
     }
 
     public void TakeDamage() { //int damage) {
-        _lives--;
-        if (_lives < 1) {
-            Destroy(gameObject);
-            _enemySpawner.StopSpawning();
+        if (!_shieldActive) {
+            _lives--;
+            if (_lives < 1) {
+                Destroy(gameObject);
+                _enemySpawner.StopSpawning();
+            }
+        } else {
+            // disable shield
+            _shieldActive = false;
+            _shield.SetActive(false);
         }
     }
 
@@ -123,5 +137,10 @@ public class Player : MonoBehaviour
 
     public void ActivateSpeedBoost() {
         StartCoroutine(SpeedBoost());
+    }
+    
+    public void ActivateShield() {
+        _shieldActive = true;
+        _shield.SetActive(true);
     }
 }

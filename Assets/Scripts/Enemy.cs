@@ -22,8 +22,8 @@ public class Enemy : MonoBehaviour
             Destroy(other.gameObject);
             Destroy(gameObject);
         } else if ( other.tag == "Player") {
-            other.GetComponent<Player>().TakeDamage();
             Destroy(gameObject);
+            other.GetComponent<Player>().TakeDamage();
         }
     }
 }

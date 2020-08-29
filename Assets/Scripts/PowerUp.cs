@@ -29,6 +29,9 @@ public class PowerUp : MonoBehaviour
                     case 1:
                         p.ActivateSpeedBoost();
                         break;
+                    case 2:
+                        p.ActivateShield();
+                        break;
                 }
                 Destroy(gameObject);
 

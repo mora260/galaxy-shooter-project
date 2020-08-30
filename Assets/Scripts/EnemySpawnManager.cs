@@ -24,9 +24,9 @@ public class EnemySpawnManager : MonoBehaviour
 
     IEnumerator SpawnEnemies() {
         while(_spawnEnemies) {
+            yield return new WaitForSeconds(_enemyWaitTime);
             GameObject newEnemy = Instantiate(_enemyPrefab, RandomEnemyPosition(), Quaternion.identity);
             newEnemy.transform.SetParent(_enemyContainer.transform);
-            yield return new WaitForSeconds(_enemyWaitTime);
         }
     }
 

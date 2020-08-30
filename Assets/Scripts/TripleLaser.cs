@@ -13,7 +13,7 @@ public class TripleLaser : MonoBehaviour
         Transform leftLaser = transform.Find("LeftLaser");
         Transform rightLaser = transform.Find("RightLaser");
 
-        if (leftLaser == null | rightLaser == null) {
+        if (leftLaser == null || rightLaser == null) {
             Destroy(gameObject);
         } else {
             leftLaser.Translate( new Vector3(-1,0,0) * Time.deltaTime * _speed);

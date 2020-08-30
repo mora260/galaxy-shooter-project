@@ -49,13 +49,13 @@ public class Player : MonoBehaviour
     {
         Debug.Log("Game started");
         transform.position = new Vector3(0f,0f,0f);
-        _enemySpawner = GameObject.Find("EnemySpawnManager").GetComponent<EnemySpawnManager>();
-        _shield = transform.Find("Shield").gameObject;
-        _uiManager = GameObject.Find("Canvas").GetComponent<UIManager>();
-
+        _enemySpawner = GameObject.Find("EnemySpawnManager")?.GetComponent<EnemySpawnManager>();
+        _shield = transform.Find("Shield")?.gameObject;
+        _uiManager = GameObject.Find("Canvas")?.GetComponent<UIManager>();
 
         if (_enemySpawner == null || _shield == null || _uiManager == null) {
-            Debug.LogError("Important element are null!!");
+            Debug.LogError("Important element are null, Player will be destroyed for safety!!");
+            Destroy(gameObject);
         }
 
     }

@@ -19,11 +19,6 @@ public class PowerUpSpawnManager : MonoBehaviour
     [SerializeField]
     private bool _spawnPowerUps = true;
 
-
-    private void Start() {
-        StartCoroutine(SpawnPowerUps());
-    }
-
     IEnumerator SpawnPowerUps() {
         while(_spawnPowerUps) {
             yield return new WaitForSeconds(RandomWait());
@@ -43,6 +38,10 @@ public class PowerUpSpawnManager : MonoBehaviour
 
     public void StopSpawning() {
         _spawnPowerUps = false;
+    }
+
+    public void StartSpawning() {
+        StartCoroutine(SpawnPowerUps());
     }
 
     private GameObject GetRandomPowerUp() {

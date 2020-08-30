@@ -17,11 +17,6 @@ public class EnemySpawnManager : MonoBehaviour
 
     private bool _spawnEnemies = true;
 
-
-    private void Start() {
-        StartCoroutine(SpawnEnemies());
-    }
-
     IEnumerator SpawnEnemies() {
         while(_spawnEnemies) {
             yield return new WaitForSeconds(_enemyWaitTime);
@@ -39,5 +34,8 @@ public class EnemySpawnManager : MonoBehaviour
         _spawnEnemies = false;
     }
 
+    public void StartSpawning() {
+        StartCoroutine(SpawnEnemies());
+    }
 
 }

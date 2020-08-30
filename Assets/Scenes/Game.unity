@@ -1028,9 +1028,9 @@ PrefabInstance:
       propertyPath: m_Name
       value: EnemySpawnManager
       objectReference: {fileID: 0}
-    - target: {fileID: 6174263391695090626, guid: bd72f5d6d12908247ae840f3723fe098, type: 3}
-      propertyPath: m_IsActive
-      value: 1
+    - target: {fileID: 7652570331989175179, guid: bd72f5d6d12908247ae840f3723fe098, type: 3}
+      propertyPath: _enemyWaitTime
+      value: 2
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: bd72f5d6d12908247ae840f3723fe098, type: 3}
@@ -1098,10 +1098,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 956926973, guid: 8a137f7d8b415b54fbdf4831c7d6d4ab, type: 3}
-      propertyPath: _explosionPrefab
-      value: 
-      objectReference: {fileID: 1454723486049883829, guid: 799ee9d99103b5548a43759021e91b1f, type: 3}
     - target: {fileID: 6896239733730950777, guid: 8a137f7d8b415b54fbdf4831c7d6d4ab, type: 3}
       propertyPath: m_Name
       value: Asteroid
@@ -1165,7 +1161,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8662627017871654949, guid: 303aebe8e0d3afe49ad4034f32736a95, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0
+      value: -2.5
       objectReference: {fileID: 0}
     - target: {fileID: 8662627017871654949, guid: 303aebe8e0d3afe49ad4034f32736a95, type: 3}
       propertyPath: m_LocalPosition.z

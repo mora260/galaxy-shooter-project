@@ -13,7 +13,7 @@ public class Player : MonoBehaviour
     [SerializeField]
     private GameObject _laserPrefab = null;
 
-        [SerializeField]
+    [SerializeField]
     private GameObject _tripleLaserPrefab = null;
 
     private float _lastFire = 0;
@@ -44,11 +44,17 @@ public class Player : MonoBehaviour
 
     private UIManager _uiManager = null;
 
+    [SerializeField]
+    private GameObject _leftEngineDamage = null;
+
+    [SerializeField]
+    private GameObject _rightEngineDamage = null;
+
     // Start is called before the first frame update
     void Start()
     {
         Debug.Log("Game started");
-        transform.position = new Vector3(0f,0f,0f);
+        transform.position = new Vector3(0f,-2.5f,0f);
         _enemySpawner = GameObject.Find("EnemySpawnManager")?.GetComponent<EnemySpawnManager>();
         _shield = transform.Find("Shield")?.gameObject;
         _uiManager = GameObject.Find("Canvas")?.GetComponent<UIManager>();
@@ -113,6 +119,7 @@ public class Player : MonoBehaviour
     public void TakeDamage() { //int damage) {
         if (!_shieldActive && _lives > 0) {
             _lives--;
+            DamageEngine();
             _uiManager.UpdateLives(_lives);
             if (_lives < 1) {
                 Destroy(gameObject);
@@ -154,4 +161,27 @@ public class Player : MonoBehaviour
         _uiManager.UpdateScore(_score);
     }
 
+    private void DamageEngine() {
+        if (_leftEngineDamage.activeSelf) {
+            _rightEngineDamage.SetActive(true);
+            return;
+        }
+
+        if (_rightEngineDamage.activeSelf) {
+            _leftEngineDamage.SetActive(true);
+            return;
+        }
+
+        int side = Random.Range(0,2);
+
+        switch (side) {
+            case 0:
+                _leftEngineDamage.SetActive(true);
+                break;
+            case 1:
+                _rightEngineDamage.SetActive(true);
+                break;
+        }
+
+    }
 }

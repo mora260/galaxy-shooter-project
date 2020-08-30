@@ -13,13 +13,15 @@ public class Asteroid : MonoBehaviour
 
     private EnemySpawnManager _enemySpawnManager = null;
     private PowerUpSpawnManager _powerUpSpawnManager = null;
+    private CircleCollider2D _collider = null;
 
     // Start is called before the first frame update
     void Start()
     {
         _powerUpSpawnManager = GameObject.Find("PowerUpSpawnManager")?.GetComponent<PowerUpSpawnManager>();
         _enemySpawnManager = GameObject.Find("EnemySpawnManager")?.GetComponent<EnemySpawnManager>();
-        if (_powerUpSpawnManager == null || _enemySpawnManager == null) {
+        _collider = GetComponent<CircleCollider2D>();
+        if (_powerUpSpawnManager == null || _enemySpawnManager == null || _collider == null) {
             Debug.LogError("Important components are missing. The object will destroy itself for safety.");
             Destroy(gameObject);
         }
@@ -36,9 +38,14 @@ public class Asteroid : MonoBehaviour
             Destroy(other.gameObject);
             GameObject explosion = Instantiate(_explosionPrefab, transform.position, Quaternion.identity);
             Destroy(explosion, 2.8f);
-            _enemySpawnManager.StartSpawning();
-            _powerUpSpawnManager.StartSpawning();
-            Destroy(gameObject, 0.2f);
-        }
+            DestroyAndStartSpawning();
+        }  
+    }
+
+    private void DestroyAndStartSpawning() {
+        _collider.enabled = false;
+        _enemySpawnManager.StartSpawning();
+        _powerUpSpawnManager.StartSpawning();
+        Destroy(gameObject, 0.2f);
     }
 }

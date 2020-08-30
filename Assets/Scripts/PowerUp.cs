@@ -8,7 +8,10 @@ public class PowerUp : MonoBehaviour
     private float _speed = 3;
 
     [SerializeField]
-    private float _PowerUpID = 0;
+    private float _powerUpID = 0;
+
+    [SerializeField]
+    private AudioClip _powerUpSound = null;
 
     private void Update() {
          transform.Translate(Vector3.down * Time.deltaTime * _speed); // transform.position = new Vector3(transform.position.x, transform.position.y + Time.deltaTime * _speed, transform.position.z);
@@ -20,7 +23,7 @@ public class PowerUp : MonoBehaviour
         if (other.tag == "Player") {
             Player p = other.transform.GetComponent<Player>();
             if (p != null) {
-                switch (_PowerUpID)
+                switch (_powerUpID)
                 {
                     case 0:
                         p.TripleLaserPowerOn = true;
@@ -33,8 +36,8 @@ public class PowerUp : MonoBehaviour
                         p.ActivateShield();
                         break;
                 }
+                AudioSource.PlayClipAtPoint(_powerUpSound, new Vector3(0,0,-10), 0.5f);
                 Destroy(gameObject);
-
             }
         }
     }

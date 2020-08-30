@@ -11,14 +11,24 @@ public class Enemy : MonoBehaviour
     private BoxCollider2D _collider = null;
     private bool _notDestroyed = true;
 
+    [SerializeField]
+    private AudioClip _explosionSound = null;
+
+    private AudioSource _audioSource = null;
+
     private void Start() {
         _player = GameObject.Find("Player")?.GetComponent<Player>();
         _animator = GetComponent<Animator>();
         _collider = GetComponent<BoxCollider2D>();
-        if (_player == null || _animator == null || _collider == null) {
+        _audioSource = GetComponent<AudioSource>();
+        
+        if (_player == null || _animator == null || _collider == null || _audioSource == null) {
             Debug.LogError("Important Components are missing, the game object will be destroyed now for safety!");
             Destroy(gameObject);
+        } else {
+            _audioSource.clip = _explosionSound;
         }
+
     }
 
     // Update is called once per frame
@@ -51,6 +61,7 @@ public class Enemy : MonoBehaviour
         _collider.enabled = false;
         _speed*=0.75f;
         _animator.SetTrigger("OnEnemyDestroyed");
+        _audioSource.Play();
         Destroy(gameObject, 2.4f);
     }
 

@@ -49,6 +49,14 @@ public class Player : MonoBehaviour
 
     [SerializeField]
     private GameObject _rightEngineDamage = null;
+    private AudioSource _audioSource = null;
+
+    [SerializeField]
+    private AudioClip _laserSound = null;
+
+    [SerializeField]
+    private GameObject _explosionPrefab = null;
+
 
     // Start is called before the first frame update
     void Start()
@@ -58,10 +66,13 @@ public class Player : MonoBehaviour
         _enemySpawner = GameObject.Find("EnemySpawnManager")?.GetComponent<EnemySpawnManager>();
         _shield = transform.Find("Shield")?.gameObject;
         _uiManager = GameObject.Find("Canvas")?.GetComponent<UIManager>();
+        _audioSource = GetComponent<AudioSource>();
 
-        if (_enemySpawner == null || _shield == null || _uiManager == null) {
+        if (_enemySpawner == null || _shield == null || _uiManager == null || _audioSource == null) {
             Debug.LogError("Important element are null, Player will be destroyed for safety!!");
             Destroy(gameObject);
+        } else {
+            _audioSource.clip = _laserSound;
         }
 
     }
@@ -106,6 +117,7 @@ public class Player : MonoBehaviour
             } else {
                 GameObject newLaser = Instantiate(_laserPrefab, laserPosition, Quaternion.identity);
             }
+            _audioSource.Play();
         }
     }
 
@@ -122,6 +134,7 @@ public class Player : MonoBehaviour
             DamageEngine();
             _uiManager.UpdateLives(_lives);
             if (_lives < 1) {
+                Instantiate(_explosionPrefab, transform.position, Quaternion.identity);
                 Destroy(gameObject);
                 _enemySpawner.StopSpawning();
             }
